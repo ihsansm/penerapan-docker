@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  # Service untuk aplikasi web Node.js kita
+  webapp:
+    build: .  # Menggunakan Dockerfile di direktori ini
+    ports:
+      - "${PORT}:3000"  # Port dari .env
+    environment:
+      - MONGODB_URI=mongodb://db:27017/myapp
+    volumes:
+      - ./src:/app/src  # Hot-reload untuk development
+    depends_on:
+      - db
+    
+  # Service untuk database MongoDB
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db  # Menyimpan data MongoDB
+
+volumes:
+  mongodb_data:  # Volume untuk menyimpan data MongoDB secara persistent
