@@ -1,4 +1,3 @@
-version: '3'
 
 services:
   # Service untuk aplikasi web Node.js kita
